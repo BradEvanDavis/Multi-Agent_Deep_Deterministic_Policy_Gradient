@@ -1,23 +1,55 @@
+from unityagents import UnityEnvironment
+import random
+import torch
 
-class hyperparameters(object):
+
+class HyperParameters:
     def __init__(self):
-        self.buffer_size = 1e6
+
+        self.buffer_size = int(1e6)
         self.gamma_start = 0.9
         self.gamma = 0.99
         self.epsilon = 1.0
-        self.epsilon_decay = 1e-7
-        self.batch_size = 256  # minibatch size
-        self.TAU = 1e-3  # for soft update of target parameters
-        self.LR_ACT = 1e-3  # learning rate of the actor
-        self.LR_CRITIC = 1e-4  # learning rate of the critic
-        self.WEIGHT_DECAY = 1e-6  # L2 weight decay
-        self.LEARN_NUM = 10
-        self.LEARN_EVERY = 20
+        self.epsilon_decay = 1e-5
+        self.batch_size = 256
+        self.tau = 1e-3
+        self.lr_act = 1e-3
+        self.lr_critic = 1e-4
+        self.weight_decay = 1e-6
+        self.learn_num = 10
+        self.learn_every = 20
+        # Add OU Noise to actions
+        self.mu = 0
+        self.theta = 0.15
+        self.sigma = 0.2
+        self.noise_start = 1.0
+        self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-class training_params(object):
+
+class Options:
     def __init__(self):
-        self.n_episodes = 5000
+
+        self.n_episodes = 100000
         self.max_t = 1000
-        self.state_size = 24
-        self.action_size = 2
+        self.print_every = 50
+        self.update_frequency = 100
+        self.seed_num = 33
+        self.add_noise = True
+        self.graphics = False
+        self.option = True
         self.env_name = "Tennis.exe"
+
+
+Options = Options()
+
+
+class Environment:
+    def __init__(self):
+
+        self.num_agents = 2
+        self.action_size = 2
+        self.state_size = 24
+
+
+HyperParameters = HyperParameters()
+Environment = Environment()
