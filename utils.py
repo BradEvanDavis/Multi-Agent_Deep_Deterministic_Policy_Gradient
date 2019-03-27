@@ -9,18 +9,7 @@ import copy
 import torch
 
 
-def save_checkpoint(model, optimizer, save_path, episode_num, mean_scores, moving_avg, scores_window, duration):
-    checkpointRes = {'model_state_dict': model.state_dict(),
-                     'optimizer_state_dict': optimizer.state_dict(),
-                     'episode_num': episode_num,
-                     'moving_avg': moving_avgs,
-                     'scores_window': scores_window,
-                     'duration': duration}
-
-    torch.save(checkpointRes, save_path)
-
-
-# device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+#device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 device = torch.device("cpu")
 
 

@@ -6,7 +6,7 @@ import torch
 class HyperParameters:
     def __init__(self):
 
-        self.buffer_size = int(1e6)
+        self.buffer_size = int(1e5)
         self.gamma_start = 0.9
         self.gamma = 0.99
         self.epsilon = 1.0
@@ -15,7 +15,7 @@ class HyperParameters:
         self.tau = 1e-3
         self.lr_act = 1e-3
         self.lr_critic = 1e-4
-        self.weight_decay = 1e-6
+        self.weight_decay = 1e-8
         self.learn_num = 10
         self.learn_every = 20
         # Add OU Noise to actions
@@ -29,11 +29,11 @@ class HyperParameters:
 class Options:
     def __init__(self):
 
-        self.n_episodes = 100000
+        self.n_episodes = 5000
         self.max_t = 1000
         self.print_every = 50
-        self.update_frequency = 100
-        self.seed_num = 33
+        self.update_frequency = 1
+        self.seed_num = 47
         self.add_noise = True
         self.graphics = False
         self.option = True

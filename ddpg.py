@@ -10,7 +10,7 @@ from utils import OUNoise
 import random
 import utils
 
-# device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+#device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 device = torch.device("cpu")
 class Ddpg:
     def __init__(self, index):

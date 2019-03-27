@@ -6,7 +6,7 @@ from collections import deque
 from maddpg import maddpg
 from unityagents import UnityEnvironment
 from vars import Options
-
+from vars import Environment as Env
 
 def save_checkpoint(model, optimizer, save_path, episode_num, moving_avgs, scores_window, duration):
     checkpointRes = {'model_state_dict': model.state_dict(),
@@ -30,24 +30,25 @@ def train_loop(env, brain_name, agent, loader=False, actor_loadFile=None, critic
         scores = stats['scores']
         avg_scores = stats['mean_scores']
 
-        agent.actor_local.load_state_dict(actor_load['model_state_dict'])
-        agent.actor_optimizer.load_state_dict(actor_load['optimizer_state_dict'])
+        for a, i in zip(maddpg.agents, [1, 2]):
+            a+'.checkpoint_actor_local{}.pth'.format(i).load_state_dict(actor_load['model_state_dict'])
+            a.actor_optimizer.load_state_dict(actor_load['optimizer_state_dict'])
 
-        agent.critic_local.load_state_dict(critic_load['model_state_dict'])
-        agent.critic_optimizer.load_state_dict(critic_load['optimizer_state_dict'])
+            a.critic_local.load_state_dict(critic_load['model_state_dict'])
+            a.critic_optimizer.load_state_dict(critic_load['optimizer_state_dict'])
 
     elif loader == False and counter == 0:
 
         scores = []
         scores_window = deque(maxlen=100)
         avg_scores = []
-        writer = SummaryWriter('runs/run1')
+        writer = SummaryWriter('runs/run3')
         start_time = time.time()
         solved = False
 
     for e in range(1, Options.n_episodes + 1):
 
-        rewards = []
+        rewards = np.zeros(Env.num_agents)
         env_info = env.reset(train_mode=True)[brain_name]
         state = env_info.vector_observations
         counter += 1
@@ -62,11 +63,11 @@ def train_loop(env, brain_name, agent, loader=False, actor_loadFile=None, critic
             done = env_info.local_done
             agent.step(state, action, reward, next_state, done)
             state = next_state
-            rewards.append(reward)
+            rewards += env_info.rewards
             if any(done):
                 break
 
-        scores.append(sum(np.array(rewards).sum(1)))
+        scores.append(np.max(rewards))
         scores_window.append(scores[-1])
         avg_scores.append(np.mean(scores_window))
         duration = time.time() - start_time
@@ -96,19 +97,19 @@ def train_loop(env, brain_name, agent, loader=False, actor_loadFile=None, critic
             solved = True
             print('\nEnvironment solved in {:d} episodes with an 100 turn Moving Average Score of {:.2f} over 100 turns\n'.format(e, avg_scores[-1]))
             for a, i in zip(maddpg.agents, [1,2]):
-                save_checkpoint(a.actor_local, a.actor_optimizer, 'checkpoint_actor_local{}.pth'.format(i+'_beat'),
+                save_checkpoint(a.actor_local, a.actor_optimizer, 'checkpoint_actor_local{}.pth'.format(str(i)+'_beat'),
                                 episode_num=episode_num, moving_avgs=avg_scores, scores_window=scores_window,
                                 duration=duration)
 
-                save_checkpoint(a.critic_local, a.critic_optimizer, 'checkpoint_actor_local{}.pth'.format(i+'_beat'),
+                save_checkpoint(a.critic_local, a.critic_optimizer, 'checkpoint_actor_local{}.pth'.format(str(i)+'_beat'),
                                 episode_num=episode_num, moving_avgs=avg_scores, scores_window=scores_window,
                                 duration=duration)
 
-                save_checkpoint(a.actor_target, a.actor_optimizer, 'checkpoint_actor_target{}.pth'.format(i+'_beat'),
+                save_checkpoint(a.actor_target, a.actor_optimizer, 'checkpoint_actor_target{}.pth'.format(str(i)+'_beat'),
                                 episode_num=episode_num, moving_avgs=avg_scores, scores_window=scores_window,
                                 duration=duration)
 
-                save_checkpoint(a.critic_target, a.critic_optimizer, 'checkpoint_critic_target{}.pth'.format(i+'_beat'),
+                save_checkpoint(a.critic_target, a.critic_optimizer, 'checkpoint_critic_target{}.pth'.format(str(i)+'_beat'),
                                 episode_num=episode_num, moving_avgs=avg_scores, scores_window=scores_window,
                                 duration=duration)
 
