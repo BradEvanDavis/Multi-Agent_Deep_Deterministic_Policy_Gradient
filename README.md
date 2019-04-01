@@ -9,7 +9,8 @@ Throughout this project, former work done in the deep deterministic policy gradi
 # Goals
 Project scores were determined based on consecutive hits by each agent.   Once an agent successfully returned the ping pong ball the agent would then receive an award of +0.1 points.  However, if an agent missed the ball / hit the ball out of bounds it would then receive -0.01 points instead.  Final scores for each episode was then calculated based on the maximum score by a single agent. The model was trained for a total of 5,000 episode where it achieved a benchmark score 100 episode moving averaging +0.5 pts after 2,337 episodes.
 
-!['Results'](https://github.com/BradEvanDavis/MultiActor_DeepDeterminnisticPolicyGradient/blob/master/tensorboard_screenshot.png "Results after 5000 episodes")
+
+![Results](https://github.com/BradEvanDavis/MultiActor_DeepDeterminnisticPolicyGradient/raw/master/tensorboard_screenshot.PNG)
 
 # Multi Agent Deep Deterministic Policy Gradient Explained:
 This actor-critic implementation utilizes deep reinforcement learning known as Deep Deterministic Policy Gradient (DDPG) to evaluate a continuous action space. DDPG is based on the papers ‘Deterministic Policy Gradient Algorithms’ published in 2014 by David Silver and ‘Continuous Control with Deep Reinforcement Learning’ published by Tomothy P. Lillicrap in 2015.  To continue exploration of DDPG, and inspired by “Multi Agent Actor Critic for Mixed Cooperative Competitive environments “ by OpenAI, the functionality of the original DDPG algorithm was able to be enhanced by creating multiple instances of the same agent within the 'Tennis' environment allowing the agents to learn to competitively cooperate with one-another while playing a game of table tennis.
