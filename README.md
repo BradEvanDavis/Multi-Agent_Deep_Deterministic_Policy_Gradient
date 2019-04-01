@@ -23,3 +23,26 @@ Interestingly, after maxing out after 2.5K episodes with a 100 episode MA score 
 
 Next steps include implementing a prioritized replay buffer or implementing a d4pg agent instead of ddpg.  Furthermore, it would be interesting to test whether or not the current model would continue to improve with additional episodes post-5,000  continuing the upward trend demonstrated in the first 5,000 episodes.
 
+# How to run:
+1.  Clone this repository onto your machine and unzip into a directory of your choice
+2.  Download and install Anaconda if needed
+3.  Create a new environment and install the package requirements listed below
+4.  Download the Unity environment and unzip the executable into the project’s parent directory. 
+  a.	It is recommended that your video card be CUDA compatible for optimal performance
+5.  Unzip and load the trained models for actors and critics  
+
+# Requirements:
+1.  python 3.6+
+2.  pytorch 1.0+ (Instructions: https://pytorch.org/)
+3.  CUDA 9.0+ (optional)
+4.  UnityAgent (Instructions: https://github.com/Unity-Technologies/ml-agents)
+5.  Numpy
+6.  Matplotlib
+7.  Tennis Unity Environment (Linux),(OSX), (Win64),(Win32)
+8.  TensorBoard
+
+# Running the Code:
+1.  Train the agent by running the appropriate training loop within train.py until obtaining a 100 episode moving average >= 0.5 pts.
+2.  Refer to TensorBoard outputs by calling 'tensorboard --logdir runs --host localhost'
+3.  Watch the actions taken by your newly trained smart agents by loading saved checkpoints into the training loop and setting the train variable to False in the vars.py file
+  a.  Note that all hyperparameters can be modified through vars.py
