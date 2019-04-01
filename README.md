@@ -1,4 +1,4 @@
-# MultiActor_DeepDeterministicPolicyGradient
+# Multi-Agent Deep Deterministic Policy Gradient
 ### Two Agents acting on each other in a game of tennis
 
 # Project Background
