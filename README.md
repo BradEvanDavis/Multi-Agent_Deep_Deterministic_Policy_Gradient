@@ -9,5 +9,5 @@ Throughout this project, former work done in the deep deterministic policy gradi
 # Goals
 Project scores were determined based on consecutive hits by each agent.   Once an agent successfully returned the ping pong ball the agent would then receive an award of +0.1 points.  However, if an agent missed the ball / hit the ball out of bounds it would then receive -0.01 points instead.  Final scores for each episode was then calculated based on the maximum score by a single agent. The model was trained for a total of 5,000 episode where it achieved a benchmark score 100 episode moving averaging +0.5 pts after 2,337 episodes.
 
-<img>'tensorboard_screenshot.PNG</img>
+<img>'tensorboard_screenshot.PNG'</img>
 
