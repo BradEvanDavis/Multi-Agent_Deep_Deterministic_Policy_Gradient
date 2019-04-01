@@ -1,5 +1,5 @@
 # MultiActor_DeepDeterminnisticPolicyGradient
-Two Agents acting on each other in a game of tennis
+### Two Agents acting on each other in a game of tennis
 
 # Project Background
 In the real world it typically takes multiple people to accomplish a certain task, likewise AI systems in the future (and the present) will need to be able to work cooperatively with other agents, including AIs and their human counterparts.  This project demonstrates a small step towards that end goal by placing multiple instances of a single agent into an environment where they must compete with one another.
