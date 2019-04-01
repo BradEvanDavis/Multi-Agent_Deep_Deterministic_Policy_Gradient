@@ -39,7 +39,7 @@ Next steps include implementing a prioritized replay buffer or implementing a d4
 5.  Numpy
 6.  Matplotlib
 7.  Tennis Unity Environment (Linux),(OSX), (Win64),(Win32)
-8.  TensorBoard
+8.  TensorBoard (pip install tensorboardX)
 
 # Running the Code:
 1.  Train the agent by running the appropriate training loop within train.py until obtaining a 100 episode moving average >= 0.5 pts.
